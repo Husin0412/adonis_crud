@@ -1,0 +1,36 @@
+@layout('master')
+
+@section('content')
+    <h1>Daftar Buku</h1>
+    @if(flashMessage('notify_delete')) 
+    <div class="alert alert-danger">
+      {{ flashMessage('notify_delete') }}
+    </div>
+    @endif
+    <table class="table table-bordered " id="datatable">
+    <thead>
+        <tr>
+        <th scope="col">No</th>
+        <th scope="col">Judul</th>
+        <th scope="col">Tahun Terbit</th>
+        <th scope="col">Deskripsi</th>
+        <th scope="col">Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @each(data in buku)
+        <tr>
+        <th scope="row">{{ $loop.index + 1 }}</th>
+            <td>{{ data.judul }}</td>
+            <td>{{ data.tahun_terbit}}</td>
+            <td>{{ data.deskripsi }}</td>
+            <td>
+                <a href="edit-buku/{{data.id}}" class="btn btn-sm btn-primary d-block">Edit</a>
+                <a href="delete-buku/{{data.id}}" class="btn btn-sm btn-danger mt-2  d-block">Hapus</a>
+            </td>
+        </tr>
+        @endeach
+    </tbody>
+    </table>
+
+@endsection
